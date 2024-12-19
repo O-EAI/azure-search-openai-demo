@@ -87,7 +87,9 @@ class DocumentAnalysisParser(Parser):
                 doc_for_pymupdf = pymupdf.open(stream=io.BytesIO(content_bytes))
             else:
                 poller = await document_intelligence_client.begin_analyze_document(
-                    model_id=self.model_id, analyze_request=content, content_type="application/octet-stream"
+                    model_id=self.model_id, 
+                    body = content, 
+                    content_type="application/octet-stream"
                 )
             analyze_result: AnalyzeResult = await poller.result()
 
